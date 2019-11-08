@@ -11,6 +11,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.sql.DataSource;
 
@@ -23,8 +25,20 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
     @Autowired
     AuthenticationManager authenticationManager;
     @Bean
-    TokenStore jdbcTokenStore(){
-        return new JdbcTokenStore(dataSource);
+    public JwtAccessTokenConverter accessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey("123");
+        return converter;
+    }
+
+//    @Bean
+//    TokenStore jdbcTokenStore(){
+//        return new JdbcTokenStore(dataSource);
+//    }
+
+    @Bean
+    public TokenStore tokenStore() {
+        return new JwtTokenStore(accessTokenConverter());
     }
 
     @Override
@@ -39,7 +53,8 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(jdbcTokenStore());
+//        endpoints.tokenStore(jdbcTokenStore());
+        endpoints.tokenStore(tokenStore()).accessTokenConverter(accessTokenConverter());
         endpoints.authenticationManager(authenticationManager);
     }
 }
