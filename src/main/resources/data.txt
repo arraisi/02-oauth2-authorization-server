@@ -19,7 +19,7 @@ VALUES ('mobile', '{bcrypt}$2y$12$QS2D7dSjmlrsgJqf9tWX8OGTFtgVbH9Zm.lWrz.mv.Gmb5
      (2,2),  /* read operator */
      (3,2);  /* update operator */
 insert into user (id, username,password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked) VALUES ('1', 'abdul','{bcrypt}$2y$12$DNnl/F5IboNkGTRgQme99O77FAerXHkaGIzt6wtY/1wXBXx88WTPe', 'user@abdul.com', '1', '1', '1', '1');
- insert into  user (id, username,password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked) VALUES ('2', 'arraisi', '{bcrypt}$2y$12$BcAyLFsx5eK8woIRlDqM4OtEpYXvM3q0E6Zqg52U6LKq5EuCuP6km','user@arraisi.com', '1', '1', '1', '1');
+insert into  user (id, username,password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked) VALUES ('2', 'arraisi', '{bcrypt}$2y$12$BcAyLFsx5eK8woIRlDqM4OtEpYXvM3q0E6Zqg52U6LKq5EuCuP6km','user@arraisi.com', '1', '1', '1', '1');
 
 INSERT INTO role_user (ROLE_ID, USER_ID)
     VALUES
